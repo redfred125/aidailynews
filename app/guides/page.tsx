@@ -14,6 +14,7 @@ const guides = [
     time: '30 min',
     icon: Bot,
     color: 'blue',
+    href: '/guides/getting-started-openclaw',
   },
   {
     title: 'Securing Your AI Agent',
@@ -22,6 +23,7 @@ const guides = [
     time: '45 min',
     icon: Shield,
     color: 'red',
+    href: '/guides/securing-ai-agent',
   },
   {
     title: 'Claude Code Workflow Setup',
@@ -30,6 +32,7 @@ const guides = [
     time: '20 min',
     icon: Terminal,
     color: 'purple',
+    href: '/article/3', // Linking to article for now as guide content is similar
   },
   {
     title: 'Local LLM Integration',
@@ -38,6 +41,7 @@ const guides = [
     time: '60 min',
     icon: Code,
     color: 'green',
+    href: '/guides/local-llm-integration',
   },
 ];
 
@@ -76,30 +80,32 @@ export default function GuidesPage() {
           {guides.map((guide, index) => {
             const Icon = guide.icon;
             return (
-              <div key={index} className="bg-gray-800 rounded-xl p-6 border border-gray-700 hover:border-gray-600 transition-colors group cursor-pointer">
-                <div className="flex items-start space-x-4">
-                  <div className={`flex-shrink-0 w-12 h-12 rounded-lg bg-${guide.color}-500/10 flex items-center justify-center group-hover:bg-${guide.color}-500/20 transition-colors`}>
-                    <Icon className={`w-6 h-6 text-${guide.color}-400`} />
-                  </div>
-                  <div className="flex-1">
-                    <div className="flex items-center space-x-2 mb-2">
-                      <span className="text-xs text-gray-500">{guide.level}</span>
-                      <span className="text-gray-600">•</span>
-                      <span className="text-xs text-gray-500">{guide.time}</span>
+              <Link key={index} href={guide.href} className="block group">
+                <div className="bg-gray-800 rounded-xl p-6 border border-gray-700 hover:border-gray-600 transition-colors h-full flex flex-col">
+                  <div className="flex items-start space-x-4 mb-4">
+                    <div className={`flex-shrink-0 w-12 h-12 rounded-lg bg-${guide.color}-500/10 flex items-center justify-center group-hover:bg-${guide.color}-500/20 transition-colors`}>
+                      <Icon className={`w-6 h-6 text-${guide.color}-400`} />
                     </div>
-                    <h2 className="text-xl font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">
-                      {guide.title}
-                    </h2>
-                    <p className="text-gray-400 text-sm">{guide.description}</p>
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-2 mb-2">
+                        <span className="text-xs text-gray-500">{guide.level}</span>
+                        <span className="text-gray-600">•</span>
+                        <span className="text-xs text-gray-500">{guide.time}</span>
+                      </div>
+                      <h2 className="text-xl font-semibold text-white mb-2 group-hover:text-blue-400 transition-colors">
+                        {guide.title}
+                      </h2>
+                      <p className="text-gray-400 text-sm">{guide.description}</p>
+                    </div>
+                  </div>
+                  <div className="mt-auto pt-4 border-t border-gray-700">
+                    <span className="text-blue-400 text-sm font-medium flex items-center">
+                      <BookOpen className="w-4 h-4 mr-2" />
+                      Read Guide →
+                    </span>
                   </div>
                 </div>
-                <div className="mt-4 pt-4 border-t border-gray-700">
-                  <span className="text-blue-400 text-sm font-medium flex items-center">
-                    <BookOpen className="w-4 h-4 mr-2" />
-                    Read Guide →
-                  </span>
-                </div>
-              </div>
+              </Link>
             );
           })}
         </div>

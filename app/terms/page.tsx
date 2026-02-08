@@ -31,9 +31,9 @@ export default function TermsPage() {
       <main className="max-w-4xl mx-auto px-4 py-12">
         <h1 className="text-4xl font-bold text-white mb-8">Terms of Service</h1>
         
-        <div className="prose prose-invert max-w-none">
-          <p className="text-gray-400">Last updated: February 8, 2026</p>
+        <p className="text-gray-400">Last updated: February 8, 2026</p>
 
+        <div className="prose prose-invert max-w-none">
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">Agreement to Terms</h2>
           <p className="text-gray-300">
             By accessing AI Daily News, you agree to these terms. If you disagree, please don't use our site.

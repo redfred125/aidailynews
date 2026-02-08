@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Bot, ArrowLeft } from 'lucide-react';
+import { Bot, ArrowLeft, Shield, Clock } from 'lucide-react';
 
 export const metadata = {
   title: 'Privacy Policy | AI Daily News',
@@ -31,9 +31,9 @@ export default function PrivacyPage() {
       <main className="max-w-4xl mx-auto px-4 py-12">
         <h1 className="text-4xl font-bold text-white mb-8">Privacy Policy</h1>
         
-        <div className="prose prose-invert max-w-none">
-          <p className="text-gray-400">Last updated: February 8, 2026</p>
+        <p className="text-gray-400">Last updated: February 8, 2026</p>
 
+        <div className="prose prose-invert max-w-none">
           <h2 className="text-2xl font-bold text-white mt-8 mb-4">Overview</h2>
           <p className="text-gray-300">
             AI Daily News respects your privacy. This policy explains what data we collect and how we use it.
