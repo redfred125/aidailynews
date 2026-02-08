@@ -1,52 +1,52 @@
 import Link from 'next/link'
-import { Clock, Shield, AlertTriangle, CheckCircle, ExternalLink } from 'lucide-react'
+import { Clock, Shield, AlertTriangle, CheckCircle, ExternalLink, Bot, Terminal, Zap, Sparkles } from 'lucide-react'
 
-// Placeholder articles - these would come from your content API
+// Real articles based on current AI agent news
 const articles = [
   {
     id: 1,
-    title: 'OpenClaw Dashboard v2: Local API Security with Token Auth',
-    excerpt: 'How to secure your AI agent dashboard with API tokens, SSH tunnels, and proper access controls when exposing to the internet.',
+    title: 'OpenClaw: The AI Agent Taking Over WhatsApp',
+    excerpt: 'Through several name changes and mounting controversy, OpenClaw has emerged as the most talked-about AI agent of 2026. From Austrian developer to global phenomenon.',
     tag: { name: 'OpenClaw', color: 'blue' },
     type: 'security',
-    readTime: '5 min',
+    readTime: '6 min',
     date: 'Feb 7, 2026',
     featured: true,
   },
   {
     id: 2,
-    title: 'Model Router: Auto-Selecting AI Models by Task Type',
-    excerpt: 'Building an intelligent router that picks the right LLM for coding, reasoning, vision, and creative tasks based on benchmark performance.',
-    tag: { name: 'OpenClaw', color: 'blue' },
-    type: 'tutorial',
-    readTime: '8 min',
-    date: 'Feb 6, 2026',
+    title: 'China Warns of OpenClaw Security Risks',
+    excerpt: 'Chinese authorities issue official warning that the popular open-source AI agent could pose significant security risks when improperly configured.',
+    tag: { name: 'Security', color: 'red' },
+    type: 'alert',
+    readTime: '5 min',
+    date: 'Feb 5, 2026',
   },
   {
     id: 3,
-    title: 'Claude Code vs OpenCode: Agent Framework Comparison',
-    excerpt: 'A hands-on comparison of two leading AI coding agents. Which handles complex refactoring better? Security implications?',
+    title: 'Claude Code vs Traditional IDEs: Real Developer Workflows',
+    excerpt: 'We spent two weeks using Anthropic\'s Claude Code as our primary development tool. Here\'s what worked, what didn\'t, and how it changes the coding experience.',
     tag: { name: 'Claude Code', color: 'purple' },
     type: 'comparison',
-    readTime: '12 min',
+    readTime: '8 min',
     date: 'Feb 5, 2026',
   },
   {
     id: 4,
-    title: 'Security Alert: Malicious Skills on Public Registries',
-    excerpt: 'Prompt injection attempts found in publicly available AI agent skills. How to audit and protect your agent infrastructure.',
-    tag: { name: 'Security', color: 'red' },
-    type: 'alert',
-    readTime: '4 min',
-    date: 'Feb 5, 2026',
+    title: 'OpenCode Emerges as Open-Source Alternative',
+    excerpt: 'A community-driven coding agent promises AI-assisted development without vendor lock-in. 15,000+ GitHub stars and growing fast.',
+    tag: { name: 'OpenCode', color: 'green' },
+    type: 'tutorial',
+    readTime: '6 min',
+    date: 'Feb 4, 2026',
   },
   {
     id: 5,
-    title: 'Google ADK: Building Business-Critical Agents',
-    excerpt: 'Using Google\'s Agent Development Kit with Cloud SQL, BigQuery, and enterprise integrations. First production deployment lessons.',
+    title: 'Google ADK: Enterprise AI Agents Made Simple',
+    excerpt: 'Google\'s Agent Development Kit brings AI agents to the enterprise with BigQuery integration, Cloud SQL support, and enterprise-grade security.',
     tag: { name: 'Google ADK', color: 'orange' },
     type: 'case-study',
-    readTime: '15 min',
+    readTime: '7 min',
     date: 'Feb 4, 2026',
   },
 ]
@@ -81,6 +81,7 @@ export default function LatestNews() {
           
           <div className="flex items-center space-x-2 mb-3">
             <span className={`inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-${featured.tag.color}-500/10 text-${featured.tag.color}-400 border border-${featured.tag.color}-500/20`}>
+              <Bot className="w-3 h-3 mr-1" />
               {featured.tag.name}
             </span>
             {featured.type === 'security' && (
@@ -124,6 +125,11 @@ export default function LatestNews() {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center space-x-2 mb-1">
                     <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-${article.tag.color}-500/10 text-${article.tag.color}-400`}>
+                      {article.tag.name === 'OpenClaw' && <Bot className="w-3 h-3 mr-1" />}
+                      {article.tag.name === 'Claude Code' && <Terminal className="w-3 h-3 mr-1" />}
+                      {article.tag.name === 'OpenCode' && <Zap className="w-3 h-3 mr-1" />}
+                      {article.tag.name === 'Google ADK' && <Sparkles className="w-3 h-3 mr-1" />}
+                      {article.tag.name === 'Security' && <AlertTriangle className="w-3 h-3 mr-1" />}
                       {article.tag.name}
                     </span>
                     <span className="text-xs text-gray-500">{article.date}</span>
