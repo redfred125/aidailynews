@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Bot, ArrowLeft, Clock, Bot as BotIcon, Terminal, Zap, Sparkles, Shield } from 'lucide-react';
+import { Bot, ArrowLeft, Clock, Bot as BotIcon, Terminal, Zap, Sparkles, Shield, BookOpen, TrendingUp, Search } from 'lucide-react';
 
 export const metadata = {
   title: 'Archive | AI Daily News',
@@ -7,6 +7,56 @@ export const metadata = {
 };
 
 const articles = [
+  {
+    id: 10,
+    title: 'Enhancing AI Agent Search Capabilities',
+    excerpt: 'Research highlights methods to help AI agents search more effectively within LLMs for optimal results.',
+    tag: 'LLM Optimization',
+    color: 'red',
+    icon: Search,
+    readTime: '8 min',
+    date: 'Feb 5, 2026',
+  },
+  {
+    id: 9,
+    title: 'Moltbook\'s Swarm Intelligence Framework',
+    excerpt: 'Exploring Moltbook\'s new framework that enables multiple AI agents to collaborate simultaneously on complex tasks.',
+    tag: 'Swarm Intelligence',
+    color: 'purple',
+    icon: TrendingUp,
+    readTime: '6 min',
+    date: 'Feb 3, 2026',
+  },
+  {
+    id: 8,
+    title: 'AI Agents Replacing Frameworks? The Shifting Landscape of Coding',
+    excerpt: 'A deep dive into how AI agents are streamlining development, potentially reducing reliance on traditional coding frameworks.',
+    tag: 'AI Coding',
+    color: 'green',
+    icon: BotIcon,
+    readTime: '9 min',
+    date: 'Feb 5, 2026',
+  },
+  {
+    id: 7,
+    title: 'OpenAI Frontier: Enterprise AI Agent Platform',
+    excerpt: 'OpenAI introduces Frontier, a new platform designed for enterprises to build, deploy, and manage AI agents efficiently.',
+    tag: 'OpenAI',
+    color: 'purple',
+    icon: BotIcon,
+    readTime: '7 min',
+    date: 'Feb 7, 2026',
+  },
+  {
+    id: 6,
+    title: 'AI Agent Frameworks Landscape - February 2026',
+    excerpt: 'Insights into task orchestration, communication infrastructure, and human-AI interaction protocols shaping the industry.',
+    tag: 'Frameworks',
+    color: 'blue',
+    icon: BookOpen,
+    readTime: '10 min',
+    date: 'Feb 8, 2026',
+  },
   {
     id: 1,
     title: 'OpenClaw: The AI Agent Taking Over WhatsApp',
