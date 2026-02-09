@@ -41,7 +41,7 @@ export default function RootLayout({
               '@context': 'https://schema.org',
               '@type': 'WebSite',
               name: 'AI Daily News',
-              url: 'https://aidailynews.org',
+              url: 'https://redfred125.github.io/aidailynews',
               description: 'Daily curated artificial intelligence news',
               publisher: {
                 '@type': 'Organization',
