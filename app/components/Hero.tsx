@@ -1,12 +1,18 @@
 import Link from 'next/link'
 import { ArrowRight, Bot, Zap, Shield, Terminal, Sparkles } from 'lucide-react'
+import { frameworks as frameworksData } from '@/app/lib/data'
 
-const frameworks = [
-  { name: 'OpenClaw', status: 'Building', color: 'blue', icon: Bot },
-  { name: 'Claude Code', status: 'Active', color: 'purple', icon: Terminal },
-  { name: 'OpenCode', status: 'Growing', color: 'green', icon: Zap },
-  { name: 'Google ADK', status: 'Beta', color: 'orange', icon: Sparkles },
-]
+const iconMap = {
+  openclaw: Bot,
+  'claude-code': Terminal,
+  opencode: Zap,
+  'google-adk': Sparkles,
+}
+
+const frameworks = frameworksData.map(fw => ({
+  ...fw,
+  icon: iconMap[fw.id as keyof typeof iconMap] || Bot
+}))
 
 export default function Hero() {
   return (

@@ -1,12 +1,23 @@
 import Link from 'next/link'
 import { TrendingUp, Bot, Code, Shield, Sparkles } from 'lucide-react'
+import { tags, getArticlesByTag } from '@/app/lib/data'
 
-const topics = [
-  { name: 'OpenClaw Security', count: 12, icon: Shield, color: 'blue' },
-  { name: 'Claude Code Tips', count: 8, icon: Code, color: 'purple' },
-  { name: 'Agent Architecture', count: 6, icon: Bot, color: 'green' },
-  { name: 'Google ADK Updates', count: 4, icon: Sparkles, color: 'orange' },
-]
+const iconMap: Record<string, any> = {
+  openclaw: Bot,
+  'claude-code': Code,
+  security: Shield,
+  'google-adk': Sparkles,
+  opencode: Code,
+  'ai-agents': Bot,
+}
+
+const topics = tags.map(tag => ({
+  name: tag.name,
+  slug: tag.slug,
+  count: getArticlesByTag(tag.id).length,
+  icon: iconMap[tag.id] || Bot,
+  color: tag.color
+}))
 
 export default function TrendingTopics() {
   return (
@@ -22,7 +33,7 @@ export default function TrendingTopics() {
           return (
             <Link
               key={topic.name}
-              href={`/tag/${topic.name.toLowerCase().replace(/ /g, '-')}]`}
+              href={`/tag/${topic.slug}`}
               className="flex items-center justify-between p-3 rounded-lg bg-gray-750 hover:bg-gray-700 transition-colors group"
             >
               <div className="flex items-center space-x-3">

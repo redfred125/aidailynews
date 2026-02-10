@@ -1,55 +1,8 @@
 import Link from 'next/link'
 import { Clock, Shield, AlertTriangle, CheckCircle, ExternalLink } from 'lucide-react'
+import { getAllArticles } from '@/app/lib/data'
 
-// Placeholder articles - these would come from your content API
-const articles = [
-  {
-    id: 1,
-    title: 'OpenClaw Dashboard v2: Local API Security with Token Auth',
-    excerpt: 'How to secure your AI agent dashboard with API tokens, SSH tunnels, and proper access controls when exposing to the internet.',
-    tag: { name: 'OpenClaw', color: 'blue' },
-    type: 'security',
-    readTime: '5 min',
-    date: 'Feb 7, 2026',
-    featured: true,
-  },
-  {
-    id: 2,
-    title: 'Model Router: Auto-Selecting AI Models by Task Type',
-    excerpt: 'Building an intelligent router that picks the right LLM for coding, reasoning, vision, and creative tasks based on benchmark performance.',
-    tag: { name: 'OpenClaw', color: 'blue' },
-    type: 'tutorial',
-    readTime: '8 min',
-    date: 'Feb 6, 2026',
-  },
-  {
-    id: 3,
-    title: 'Claude Code vs OpenCode: Agent Framework Comparison',
-    excerpt: 'A hands-on comparison of two leading AI coding agents. Which handles complex refactoring better? Security implications?',
-    tag: { name: 'Claude Code', color: 'purple' },
-    type: 'comparison',
-    readTime: '12 min',
-    date: 'Feb 5, 2026',
-  },
-  {
-    id: 4,
-    title: 'Security Alert: Malicious Skills on Public Registries',
-    excerpt: 'Prompt injection attempts found in publicly available AI agent skills. How to audit and protect your agent infrastructure.',
-    tag: { name: 'Security', color: 'red' },
-    type: 'alert',
-    readTime: '4 min',
-    date: 'Feb 5, 2026',
-  },
-  {
-    id: 5,
-    title: 'Google ADK: Building Business-Critical Agents',
-    excerpt: 'Using Google\'s Agent Development Kit with Cloud SQL, BigQuery, and enterprise integrations. First production deployment lessons.',
-    tag: { name: 'Google ADK', color: 'orange' },
-    type: 'case-study',
-    readTime: '15 min',
-    date: 'Feb 4, 2026',
-  },
-]
+const articles = getAllArticles()
 
 const typeIcons = {
   security: Shield,
@@ -92,7 +45,7 @@ export default function LatestNews() {
           </div>
           
           <h3 className="text-xl font-bold text-white mb-2 hover:text-blue-400 transition-colors cursor-pointer">
-            <Link href={`/article/${featured.id}`}>{featured.title}</Link>
+            <Link href={`/article/${featured.slug}`}>{featured.title}</Link>
           </h3>
           
           <p className="text-gray-400 mb-4">{featured.excerpt}</p>
@@ -130,7 +83,7 @@ export default function LatestNews() {
                   </div>
                   
                   <h3 className="text-lg font-semibold text-white hover:text-blue-400 transition-colors cursor-pointer">
-                    <Link href={`/article/${article.id}`}>{article.title}</Link>
+                    <Link href={`/article/${article.slug}`}>{article.title}</Link>
                   </h3>
                   
                   <p className="text-gray-400 text-sm mt-1 line-clamp-2">{article.excerpt}</p>
