@@ -5,37 +5,46 @@ export const guides: Guide[] = [
     id: '1',
     slug: 'getting-started-openclaw',
     title: 'Getting Started with OpenClaw',
-    description: 'Build your first AI agent with OpenClaw in 30 minutes. From installation to your first custom skill.',
+    description: 'Build your first AI agent with OpenClaw in 30 minutes. From installation via the CLI wizard to your first ClawHub skill.',
     framework: 'OpenClaw',
     difficulty: 'beginner',
     readTime: '30 min',
-    lastUpdated: 'Feb 8, 2026',
+    lastUpdated: 'Feb 11, 2026',
     content: `
 # Getting Started with OpenClaw
 
-Learn how to build your first AI agent with OpenClaw from scratch.
+Learn how to build your first AI agent with OpenClaw (v2026.2.6+) from scratch.
 
 ## Prerequisites
 
 - Node.js 18+ installed
-- Basic JavaScript knowledge
-- OpenAI or Anthropic API key
+- macOS, Linux, or Windows (WSL2)
+- An API key for your preferred LLM (Anthropic, OpenAI, or xAI)
 
 ## Installation
 
+Install OpenClaw globally and run the CLI wizard:
+
 \`\`\`bash
-npm install -g openclaw
+npm install -g openclaw@latest
 openclaw init my-first-agent
 cd my-first-agent
 \`\`\`
 
+The CLI wizard will guide you through selecting your platform, LLM provider, and initial configuration.
+
 ## Configuration
 
-Create a \`.env\` file:
+OpenClaw supports multiple LLM providers. Configure your \`.env\` file:
 
 \`\`\`bash
-OPENAI_API_KEY=your_key_here
+# Choose your provider
+ANTHROPIC_API_KEY=your_key_here    # For Claude Opus 4.6
+OPENAI_API_KEY=your_key_here       # For GPT-5.3-Codex
+XAI_API_KEY=your_key_here          # For xAI Grok
+
 OPENCLAW_PORT=3000
+OPENCLAW_BIND=127.0.0.1            # Security: bind to localhost
 \`\`\`
 
 ## Your First Agent
@@ -47,11 +56,42 @@ const { Agent } = require('openclaw')
 
 const agent = new Agent({
   name: 'MyFirstAgent',
-  model: 'gpt-4',
-  skills: ['web-search', 'file-ops']
+  model: 'claude-opus-4.6',  // or 'gpt-5.3-codex', 'grok'
+  skills: ['web-search', 'file-ops'],
+  platforms: ['terminal']     // Can also add 'slack', 'discord', 'telegram'
 })
 
 agent.start()
+\`\`\`
+
+## Multi-Platform Communication
+
+Connect your agent to multiple platforms:
+
+\`\`\`javascript
+const agent = new Agent({
+  name: 'MultiPlatformBot',
+  model: 'claude-opus-4.6',
+  platforms: ['whatsapp', 'telegram', 'slack', 'discord'],
+  webui: true  // Enable the Web UI Agents dashboard
+})
+\`\`\`
+
+## Installing Skills from ClawHub
+
+Browse and install from 3,000+ community skills:
+
+\`\`\`bash
+openclaw skill install weather-lookup
+openclaw skill install code-runner
+openclaw skill install file-manager
+\`\`\`
+
+**Security note**: Enable VirusTotal scanning for skill installations:
+
+\`\`\`bash
+openclaw config set virustotal.enabled true
+openclaw config set virustotal.api_key YOUR_VT_KEY
 \`\`\`
 
 ## Adding Custom Skills
@@ -59,9 +99,9 @@ agent.start()
 \`\`\`javascript
 agent.addSkill({
   name: 'greet',
-  description: 'Greet the user',
+  description: 'Greet the user by name',
   handler: async (name) => {
-    return \`Hello, \${name}!\`
+    return \`Hello, \${name}! I'm powered by OpenClaw.\`
   }
 })
 \`\`\`
@@ -72,13 +112,22 @@ agent.addSkill({
 node agent.js
 \`\`\`
 
-Visit \`http://localhost:3000\` to interact with your agent!
+Visit \`http://localhost:3000\` to access the Web UI Agents dashboard.
+
+## Security Best Practices
+
+- Always bind to localhost (127.0.0.1) unless remote access is needed
+- Enable VirusTotal scanning for ClawHub skill installations
+- Use the built-in code safety scanner
+- Run skills in sandboxed environments
+- Keep OpenClaw updated: \`npm install -g openclaw@latest\`
 
 ## Next Steps
 
-- Explore the [Skills Library](https://openclaw.dev/skills)
-- Join the [Community Discord](https://discord.gg/openclaw)
-- Read the [Advanced Guide](/guides/advanced-openclaw)
+- Explore the [ClawHub Marketplace](https://openclaw.ai/clawhub) for 3,000+ skills
+- Read the [Documentation](https://docs.openclaw.ai)
+- Set up cron jobs for automated tasks
+- Configure browser control for web automation
     `
   },
   {
@@ -89,166 +138,216 @@ Visit \`http://localhost:3000\` to interact with your agent!
     framework: 'Claude Code',
     difficulty: 'beginner',
     readTime: '20 min',
-    lastUpdated: 'Feb 8, 2026',
+    lastUpdated: 'Feb 11, 2026',
     content: `
 # Setting Up Claude Code
 
-Get Claude Code up and running in minutes.
+Get Claude Code up and running in minutes. Claude Code is Anthropic's official CLI for Claude, powered by Claude Opus 4.6.
 
 ## Installation
 
-### macOS
+### macOS / Linux (Recommended)
 
 \`\`\`bash
-brew install claude-code
+curl -fsSL https://claude.ai/install.sh | bash
 \`\`\`
 
-### Linux
+### macOS (Homebrew)
 
 \`\`\`bash
-curl -fsSL https://claude.ai/install.sh | sh
+brew install --cask claude-code
 \`\`\`
 
 ### Windows
 
-Download from [claude.ai/code/download](https://claude.ai/code/download)
+Download from [claude.ai/code/download](https://claude.ai/code/download), or use PowerShell:
+
+\`\`\`powershell
+irm https://claude.ai/install.ps1 | iex
+\`\`\`
 
 ## Authentication
 
 \`\`\`bash
-claude-code auth login
+claude auth login
 \`\`\`
 
-Follow the browser prompt to authenticate.
+Follow the browser prompt to authenticate with your Anthropic account.
 
 ## Configuration
 
-Edit \`~/.claude-code/config.json\`:
+Edit \`~/.claude/settings.json\`:
 
 \`\`\`json
 {
-  "model": "claude-3-sonnet",
+  "model": "claude-opus-4-6",
   "editor": "vscode",
   "autoSave": true,
   "securityLevel": "high"
 }
 \`\`\`
 
+Available models:
+- \`claude-opus-4-6\` — Most capable, best reasoning (newest)
+- \`claude-sonnet-4-5\` — Fast and capable balance
+- \`claude-haiku-4-5\` — Fastest, most affordable
+
 ## First Command
 
 \`\`\`bash
-claude-code "Create a React component for a login form"
+claude "Create a React component for a login form"
 \`\`\`
+
+## CLAUDE.md Project Context
+
+Create a \`CLAUDE.md\` file at your project root to give Claude persistent context about your project — coding standards, architecture decisions, key commands. Claude reads this automatically every session.
+
+\`\`\`bash
+claude /init
+\`\`\`
+
+This generates a starter CLAUDE.md based on your project structure.
+
+## Slash Commands
+
+Use built-in slash commands for common workflows:
+- \`/init\` — Initialize CLAUDE.md for a new project
+- \`/debug\` — Start a debugging session
+- Create custom commands in \`.claude/commands/\` directory
+
+## MCP Server Integration
+
+Connect external tools via MCP (Model Context Protocol):
+
+\`\`\`bash
+claude mcp add my-database-tool
+\`\`\`
+
+MCP servers let Claude interact with databases, APIs, and external services directly.
 
 ## IDE Integration
 
-### VS Code
+### VS Code (Official Extension)
 
-Install the Claude Code extension:
+Search for "Claude Code" in the VS Code extensions marketplace.
 
-\`\`\`bash
-code --install-extension anthropic.claude-code
-\`\`\`
+### JetBrains (Beta Plugin)
 
-### JetBrains
+Available in the JetBrains Marketplace. Supports IntelliJ, WebStorm, PyCharm, and more.
 
-Download from JetBrains Marketplace.
+### Desktop App
+
+Standalone desktop application available for macOS, Linux, and Windows.
+
+## Pricing
+
+- **Pro**: \$20/month
+- **Max**: \$100-200/month (5x or 20x usage)
+- **Team**: \$25-150/user/month
+- **Enterprise**: Custom pricing
 
 ## Tips
 
-- Use \`claude-code --help\` for all commands
-- Set up keyboard shortcuts in your IDE
-- Enable auto-completion for faster coding
+- Use \`claude --help\` for all available commands
+- Create CLAUDE.md files for every project for best results
+- Use planning mode for complex multi-step tasks
+- Leverage slash commands for common workflows
+- Use \`claude --continue\` to resume your last session
 
 ## Troubleshooting
 
 **Issue**: Authentication fails
-**Solution**: Clear cache with \`claude-code auth logout\` and try again
+**Solution**: Clear cache with \`claude auth logout\` and try again
 
 **Issue**: Slow responses
-**Solution**: Switch to \`claude-3-haiku\` for faster (but less accurate) responses
+**Solution**: Switch to \`claude-haiku-4-5\` for faster (but less detailed) responses
+
+**Issue**: Missing project context
+**Solution**: Create a CLAUDE.md file at your project root with \`claude /init\`
     `
   },
   {
     id: '3',
     slug: 'advanced-agent-patterns',
     title: 'Advanced Agent Patterns',
-    description: 'Learn advanced patterns for building robust, production-ready AI agents.',
+    description: 'Learn advanced patterns for building robust, production-ready AI agents with multi-agent orchestration, MCP integration, and ADK patterns.',
     framework: 'All Frameworks',
     difficulty: 'advanced',
     readTime: '45 min',
-    lastUpdated: 'Feb 7, 2026',
+    lastUpdated: 'Feb 11, 2026',
     content: `
 # Advanced Agent Patterns
 
-Master advanced techniques for building production-ready AI agents.
+Master advanced techniques for building production-ready AI agents using modern frameworks like Claude Code, OpenClaw, and Google ADK.
 
-## Pattern 1: Chain of Thought
+## Pattern 1: Multi-Agent Orchestration (Google ADK)
 
-Break complex tasks into reasoning steps:
+Google ADK provides built-in orchestration primitives for coordinating multiple agents:
+
+**SequentialAgent**: Chains agents in order — output of one feeds into the next.
+
+**ParallelAgent**: Runs multiple agents simultaneously for independent subtasks.
+
+**LoopAgent**: Iterates an agent until a condition is met or max iterations reached.
+
+**LLM-Driven Delegation**: An orchestrator dynamically decides which sub-agent to invoke based on the task.
+
+These patterns can be combined: a SequentialAgent pipeline where one step uses ParallelAgent for fan-out, followed by a LoopAgent for iterative refinement.
+
+## Pattern 2: MCP Integration (Claude Code)
+
+Claude Code's MCP (Model Context Protocol) enables connecting to external tools — databases, APIs, CI/CD pipelines, and more. Use MCP servers to give your agent direct access to external systems without custom code.
+
+This turns Claude Code into a hub that orchestrates external services directly from the CLI.
+
+## Pattern 3: Self-Correction with Planning
+
+Use planning mode for complex tasks — break down the problem first, then execute each step with verification:
 
 \`\`\`javascript
-async function chainOfThought(problem) {
-  const steps = await agent.think({
-    task: problem,
-    strategy: 'break-down'
-  })
-
+async function planAndExecute(task) {
+  const plan = await agent.plan(task)
   const results = []
-  for (const step of steps) {
+
+  for (const step of plan.steps) {
     const result = await agent.execute(step)
-    results.push(result)
+    const verification = await agent.verify(result)
+
+    if (!verification.correct) {
+      const fix = await agent.fix(result, verification.issues)
+      results.push(fix)
+    } else {
+      results.push(result)
+    }
   }
 
   return agent.synthesize(results)
 }
 \`\`\`
 
-## Pattern 2: Self-Correction
+## Pattern 4: Skill-Based Architecture (OpenClaw)
 
-Let agents verify and fix their own outputs:
-
-\`\`\`javascript
-async function selfCorrect(task) {
-  let attempts = 0
-  let result = await agent.execute(task)
-
-  while (attempts < 3) {
-    const verification = await agent.verify(result)
-
-    if (verification.correct) {
-      return result
-    }
-
-    result = await agent.fix(result, verification.issues)
-    attempts++
-  }
-
-  throw new Error('Failed after 3 attempts')
-}
-\`\`\`
-
-## Pattern 3: Multi-Agent Collaboration
+OpenClaw's ClawHub marketplace enables modular agent composition with 3,000+ community skills:
 
 \`\`\`javascript
-const researcher = new Agent({ role: 'researcher' })
-const coder = new Agent({ role: 'coder' })
-const reviewer = new Agent({ role: 'reviewer' })
+const { Agent } = require('openclaw')
 
-async function collaborate(task) {
-  const research = await researcher.execute(task)
-  const code = await coder.execute(research)
-  const review = await reviewer.execute(code)
-
-  if (review.approved) {
-    return code
-  } else {
-    return coder.execute({ code, feedback: review })
-  }
-}
+const agent = new Agent({
+  name: 'ProductionAgent',
+  model: 'claude-opus-4.6',
+  skills: ['web-search', 'file-ops', 'browser-control', 'cron-scheduler'],
+  platforms: ['slack', 'telegram'],
+  sandbox: true  // Run skills in sandboxed environment
+})
 \`\`\`
 
-## Pattern 4: Memory Management
+Always enable VirusTotal scanning and sandboxing when using community skills.
+
+## Pattern 5: Human-in-the-Loop (Google ADK)
+
+ADK's Tool Confirmation pattern pauses execution and requests human approval before executing sensitive operations. Configure which tools require approval and which can auto-approve, providing a safety net for critical actions like deployments, deletions, or production modifications.
+
+## Pattern 6: Memory Management
 
 \`\`\`javascript
 class AgentMemory {
@@ -262,56 +361,54 @@ class AgentMemory {
     this.shortTerm.push(item)
 
     if (this.shortTerm.length > this.maxSize) {
-      // Move to long-term memory
       const old = this.shortTerm.shift()
       await this.longTerm.store(old)
     }
   }
 
   async recall(query) {
-    // Search both memories
     const recent = this.shortTerm.filter(matches(query))
     const relevant = await this.longTerm.query(query)
-
     return [...recent, ...relevant]
   }
 }
 \`\`\`
 
-## Pattern 5: Fallback Strategies
+For Google ADK, use the Interactions API for structured state management — access conversation history, agent state, and tool results. Session Rewind lets you roll back to a previous state for debugging.
+
+## Pattern 7: Cost-Optimized Model Routing
+
+Route tasks to the most cost-effective model:
 
 \`\`\`javascript
-async function withFallback(task, strategies) {
-  for (const strategy of strategies) {
-    try {
-      return await strategy.execute(task)
-    } catch (error) {
-      console.log(\`Strategy \${strategy.name} failed, trying next...\`)
-    }
+async function routeTask(task) {
+  const taskType = classifyTask(task)
+
+  const routing = {
+    'simple-qa': { model: 'claude-haiku-4-5', cost: 'low' },
+    'coding': { model: 'gpt-5.3-codex', cost: 'medium' },
+    'complex-reasoning': { model: 'claude-opus-4-6', cost: 'high' },
+    'multimodal': { model: 'gemini-3-pro', cost: 'medium' },
+    'fast-generation': { model: 'gemini-3-flash', cost: 'low' }
   }
 
-  throw new Error('All strategies failed')
+  return await execute(task, routing[taskType])
 }
-
-// Usage
-await withFallback(task, [
-  new GPT4Strategy(),
-  new ClaudeStrategy(),
-  new FallbackHumanStrategy()
-])
 \`\`\`
 
 ## Best Practices
 
-1. **Always validate inputs** - Agents can be unpredictable
-2. **Implement timeouts** - Prevent infinite loops
-3. **Log everything** - Debugging agents is hard
-4. **Test extensively** - Unit test your agent behaviors
-5. **Monitor in production** - Watch for drift and failures
+1. **Use CLAUDE.md for context** — Give coding agents persistent project knowledge
+2. **Multi-agent over monolith** — Decompose complex tasks across specialized agents
+3. **Always sandbox** — Run untrusted skills and code in isolated environments
+4. **Human-in-the-loop for critical ops** — Use ADK's Tool Confirmation pattern
+5. **Monitor everything** — Use Datadog or similar for agent observability
+6. **Version your agents** — Treat agent configurations as code
+7. **Test agent behaviors** — Unit test individual skills and integration test pipelines
 
 ## Conclusion
 
-These patterns form the foundation of robust AI agent systems. Combine them to build sophisticated, reliable agents.
+Modern agent frameworks provide powerful primitives for building sophisticated systems. Combine Google ADK's orchestration patterns, Claude Code's MCP integration, and OpenClaw's skill ecosystem to build robust, production-ready agents.
     `
   }
 ]

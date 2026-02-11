@@ -11,7 +11,7 @@ const footerLinks = {
   Resources: [
     { name: 'Build Guides', href: '/guides' },
     { name: 'Security Alerts', href: '/security' },
-    { name: 'API Docs', href: '/api' },
+    { name: 'API Docs', href: '/api-docs' },
     { name: 'RSS Feed', href: '/rss.xml' },
   ],
   About: [
